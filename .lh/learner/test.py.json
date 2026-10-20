@@ -1,0 +1,190 @@
+{
+    "sourceFile": "learner/test.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 43,
+            "patches": [
+                {
+                    "date": 1791960688732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1791960735669,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n+import os\n from openai import OpenAI\n \n+print(os.getenv())\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1791960749357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n import os\n from openai import OpenAI\n \n-print(os.getenv())\n\\ No newline at end of file\n+print(os.getenv(\"OPENAI_API_KEY\"))\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1791960777778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n import os\n from openai import OpenAI\n \n-print(os.getenv(\"OPENAI_API_KEY\"))\n\\ No newline at end of file\n+print(os.getenv(\"OPENAI_API_KEY\"))\n+\n+agent = OpenAI()\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1791960809535,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n from openai import OpenAI\n \n print(os.getenv(\"OPENAI_API_KEY\"))\n \n-agent = OpenAI()\n\\ No newline at end of file\n+agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1791960822595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n from openai import OpenAI\n \n print(os.getenv(\"OPENAI_API_KEY\"))\n \n-agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=)\n\\ No newline at end of file\n+agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n"
+                },
+                {
+                    "date": 1791960845001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,4 +3,8 @@\n \n print(os.getenv(\"OPENAI_API_KEY\"))\n \n agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n+\n+models = agent.models.list()\n+\n+print(models)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1791960915601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,11 @@\n print(os.getenv(\"OPENAI_API_KEY\"))\n \n agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n \n-models = agent.models.list()\n+response = agent.responses.create(\n+    model=\"gpt-5.5\",\n\\ No newline at end of file\n+    instructions=\"You are a helpful coding assistant.\",\n+    input=\"How do I check if a Python object is an instance of a class?\"\n+)\n \n-print(models)\n+print(response.output_text)\n"
+                },
+                {
+                    "date": 1791960945461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,5 +10,7 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(response.output_text)\n\\ No newline at end of file\n+#print(response.output_text)\n+\n+\n"
+                },
+                {
+                    "date": 1791961266069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,5 +12,7 @@\n )\n \n #print(response.output_text)\n \n-\n+from qdrant_client import QdrantClient\n+import os\n+print(QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY')).get_collections())\n"
+                },
+                {
+                    "date": 1791961273559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,6 +13,5 @@\n \n #print(response.output_text)\n \n from qdrant_client import QdrantClient\n-import os\n print(QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY')).get_collections())\n"
+                },
+                {
+                    "date": 1791961279449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import os\n from openai import OpenAI\n+from qdrant_client import QdrantClient\n \n print(os.getenv(\"OPENAI_API_KEY\"))\n \n agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n@@ -12,6 +13,5 @@\n )\n \n #print(response.output_text)\n \n-from qdrant_client import QdrantClient\n print(QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY')).get_collections())\n"
+                },
+                {
+                    "date": 1791961293428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,8 @@\n import os\n from openai import OpenAI\n from qdrant_client import QdrantClient\n \n-print(os.getenv(\"OPENAI_API_KEY\"))\n-\n agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n \n response = agent.responses.create(\n     model=\"gpt-5.5\",\n"
+                },
+                {
+                    "date": 1791961318888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,5 +11,7 @@\n )\n \n #print(response.output_text)\n \n-print(QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY')).get_collections())\n+qdrant = QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY'))\n+\n+print(qdrant)\n"
+                },
+                {
+                    "date": 1791961339958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,5 @@\n #print(response.output_text)\n \n qdrant = QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY'))\n \n-print(qdrant)\n+qdrant\n"
+                },
+                {
+                    "date": 1791961489542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,4 @@\n #print(response.output_text)\n \n qdrant = QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY'))\n \n-qdrant\n"
+                },
+                {
+                    "date": 1791961528099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,6 +11,6 @@\n )\n \n #print(response.output_text)\n \n-qdrant = QdrantClient(url=os.environ['QDRANT_URL'], api_key=os.environ.get('QDRANT_API_KEY'))\n+qdrant = QdrantClient(url=os.getenv['QDRANT_URL'], api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1791961537497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,4 +13,9 @@\n #print(response.output_text)\n \n qdrant = QdrantClient(url=os.getenv['QDRANT_URL'], api_key=os.getenv('QDRANT_API_KEY'))\n \n+response = qdrant.get_collections()\n+\n+# Extract and print names\n+for collection in response.collections:\n+    print(collection.name)\n"
+                },
+                {
+                    "date": 1791961569724,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n )\n \n #print(response.output_text)\n \n-qdrant = QdrantClient(url=os.getenv['QDRANT_URL'], api_key=os.getenv('QDRANT_API_KEY'))\n+qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n \n # Extract and print names\n"
+                },
+                {
+                    "date": 1791961651198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,8 @@\n \n qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n-\n+print(os.getenv('QDRANT_URL'))\n # Extract and print names\n for collection in response.collections:\n     print(collection.name)\n"
+                },
+                {
+                    "date": 1791961672794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,11 +11,11 @@\n )\n \n #print(response.output_text)\n \n+print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n-print(os.getenv('QDRANT_URL'))\n # Extract and print names\n for collection in response.collections:\n     print(collection.name)\n"
+                },
+                {
+                    "date": 1791961701112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n #print(response.output_text)\n \n print(os.getenv('QDRANT_URL'))\n-qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n+qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n # Extract and print names\n for collection in response.collections:\n"
+                },
+                {
+                    "date": 1792041480526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,4 +18,6 @@\n response = qdrant.get_collections()\n # Extract and print names\n for collection in response.collections:\n     print(collection.name)\n+\n+print(response)\n"
+                },
+                {
+                    "date": 1792041654974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-#print(response.output_text)\n+print(response.output_text)\n \n print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1792041671015,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(response.output_text)\n+print(agent.models.list)\n \n print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1792041680789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(agent.models.list)\n+print(agent.models.list())\n \n print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1792041762982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+import os\n+from openai import OpenAI\n+from qdrant_client import QdrantClient\n+\n+agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n+\n+response = agent.responses.create(\n+    model=\"gpt-5.5\",\n+    instructions=\"You are a helpful coding assistant.\",\n+    input=\"How do I check if a Python object is an instance of a class?\"\n+)\n+\n+print(agent.models.list())\n+\n+#print(os.getenv('QDRANT_URL'))\n+qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n+\n+response = qdrant.get_collections()\n+# Extract and print names\n+#for collection in response.collections:\n+#    print(collection.name)\n+\n+#print(response)\n"
+                },
+                {
+                    "date": 1792041794933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(agent.models.list())\n+print(agent.models.list)\n \n #print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n@@ -20,27 +20,4 @@\n #for collection in response.collections:\n #    print(collection.name)\n \n #print(response)\n-import os\n-from openai import OpenAI\n-from qdrant_client import QdrantClient\n-\n-agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n-\n-response = agent.responses.create(\n-    model=\"gpt-5.5\",\n-    instructions=\"You are a helpful coding assistant.\",\n-    input=\"How do I check if a Python object is an instance of a class?\"\n-)\n-\n-print(agent.models.list())\n-\n-print(os.getenv('QDRANT_URL'))\n-qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n-\n-response = qdrant.get_collections()\n-# Extract and print names\n-for collection in response.collections:\n-    print(collection.name)\n-\n-print(response)\n"
+                },
+                {
+                    "date": 1792042126686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(agent.models.list)\n+print(agent.models.list.)\n \n #print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1792042137707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(agent.models.list.)\n+print(agent.models.list().data)\n \n #print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1792042218598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(agent.models.list().data)\n+print(agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1792042291184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(agent.models)\n+print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n"
+                },
+                {
+                    "date": 1792044097861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,15 +9,15 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-print(\"openAI models:\", agent.models)\n+#print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n # Extract and print names\n-#for collection in response.collections:\n-#    print(collection.name)\n+for collection in response.collections:\n+    print(collection.name)\n \n #print(response)\n"
+                },
+                {
+                    "date": 1792324165873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,15 @@\n import os\n from openai import OpenAI\n from qdrant_client import QdrantClient\n \n-agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n+# agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n \n-response = agent.responses.create(\n-    model=\"gpt-5.5\",\n-    instructions=\"You are a helpful coding assistant.\",\n-    input=\"How do I check if a Python object is an instance of a class?\"\n-)\n+# response = agent.responses.create(\n+#     model=\"gpt-5.5\",\n+#     instructions=\"You are a helpful coding assistant.\",\n+#     input=\"How do I check if a Python object is an instance of a class?\"\n+# )\n \n #print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n"
+                },
+                {
+                    "date": 1792324227916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,10 @@\n \n #print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n-qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n+#qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n+qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n # Extract and print names\n for collection in response.collections:\n"
+                },
+                {
+                    "date": 1792324321836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n #print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n #qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n+print(\"Qdrant URL:\", os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n # Extract and print names\n"
+                },
+                {
+                    "date": 1792324413911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,11 +12,11 @@\n \n #print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n-#qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n-print(\"Qdrant URL:\", os.getenv('QDRANT_URL'))\n-qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n+qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n+#print(\"Qdrant URL:\", os.getenv('QDRANT_URL'))\n+#qdrant = QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))\n \n response = qdrant.get_collections()\n # Extract and print names\n for collection in response.collections:\n"
+                },
+                {
+                    "date": 1792327114260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,15 @@\n import os\n from openai import OpenAI\n from qdrant_client import QdrantClient\n \n-# agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n+agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n \n-# response = agent.responses.create(\n-#     model=\"gpt-5.5\",\n-#     instructions=\"You are a helpful coding assistant.\",\n-#     input=\"How do I check if a Python object is an instance of a class?\"\n-# )\n+response = agent.responses.create(\n+    model=\"gpt-4o-mini\",\n+    instructions=\"You are a helpful coding assistant.\",\n+    input=\"How do I check if a Python object is an instance of a class?\"\n+)\n \n #print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n"
+                },
+                {
+                    "date": 1792327172499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     instructions=\"You are a helpful coding assistant.\",\n     input=\"How do I check if a Python object is an instance of a class?\"\n )\n \n-#print(\"openAI models:\", agent.models)\n+print(\"openAI models:\", agent.models)\n \n #print(os.getenv('QDRANT_URL'))\n qdrant = QdrantClient(url=\"http://localhost:6333\", api_key=os.getenv('QDRANT_API_KEY'))\n #print(\"Qdrant URL:\", os.getenv('QDRANT_URL'))\n"
+                },
+                {
+                    "date": 1792327295819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n from openai import OpenAI\n from qdrant_client import QdrantClient\n \n agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n+print(f\"OPEN_API_KEY: {os.getenv('OPENAI_API_KEY')}\")\n \n response = agent.responses.create(\n     model=\"gpt-4o-mini\",\n     instructions=\"You are a helpful coding assistant.\",\n"
+                },
+                {
+                    "date": 1792327451264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n import os\n from openai import OpenAI\n from qdrant_client import QdrantClient\n+from dotenv import load_dotenv\n \n+load_dotenv()  # Load environment variables from .env file\n+\n+\n agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n print(f\"OPEN_API_KEY: {os.getenv('OPENAI_API_KEY')}\")\n \n response = agent.responses.create(\n"
+                },
+                {
+                    "date": 1792327466951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n from openai import OpenAI\n from qdrant_client import QdrantClient\n from dotenv import load_dotenv\n \n-load_dotenv()  # Load environment variables from .env file\n+load_dotenv(Path(__file__).parent / \".env\")  # load .env file\n \n \n agent = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"), base_url=os.getenv(\"OPENAI_BASE_URL\"))\n print(f\"OPEN_API_KEY: {os.getenv('OPENAI_API_KEY')}\")\n"
+                },
+                {
+                    "date": 1792327503182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import os\n from openai import OpenAI\n from qdrant_client import QdrantClient\n from dotenv import load_dotenv\n+import from pathlib import Path\n \n load_dotenv(Path(__file__).parent / \".env\")  # load .env file\n \n \n"
+                },
+                {
+                    "date": 1792327518162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import os\n from openai import OpenAI\n from qdrant_client import QdrantClient\n from dotenv import load_dotenv\n-import from pathlib import Path\n+from pathlib import Path\n \n load_dotenv(Path(__file__).parent / \".env\")  # load .env file\n \n \n"
+                }
+            ],
+            "date": 1791960688732,
+            "name": "Commit-0",
+            "content": "from openai import OpenAI\n\n"
+        }
+    ]
+}
