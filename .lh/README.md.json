@@ -1,0 +1,18 @@
+{
+    "sourceFile": "README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1792504137587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1792504137587,
+            "name": "Commit-0",
+            "content": "# Week 9 Graded Mini Project\n\nThis folder contains the Week 9 graded project for building a mini RAG application over a Sherlock Holmes corpus.\n\n## Project contents\n\nThe implementation and supporting files live in the `learner/` folder:\n\n- `learner/mp2_rag.py` — main RAG pipeline\n- `learner/mp2_rag_starter.py` — starter/reference implementation\n- `learner/corpus/` — source text corpus\n- `learner/data/` — evaluation questions\n- `learner/MP2_FAQ.md` — troubleshooting and FAQ\n- `learner/requirements.txt` — Python dependencies\n\n## Getting started\n\nSee the project README in the learner folder:\n\n- [learner/README.md](./learner/README.md)\n\nThat guide includes setup instructions, environment variables, Qdrant configuration, and usage commands for ingesting, querying, and validating the RAG system.\n"
+        }
+    ]
+}
